@@ -2,7 +2,7 @@ window.onload = function() {
   const firebase = require("firebase");
   require("firebase/firestore");
 
-  firebase.initializeApp({
+  var firebaseApp = firebase.initializeApp({
     apiKey: 'AIzaSyBzQLxYmWIOATomDgkhmddF2BTa6lFwKb8',
     authDomain: 'https://groove-test-af9ed.firebaseio.com',
     projectId: 'groove-test-af9ed'
@@ -10,7 +10,7 @@ window.onload = function() {
 
   console.log("Firebase initialized ***** ");
 
-  var db = firebase.firestore();
+  var db = firebaseApp.firestore();
 
   db.collection("businesses").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
