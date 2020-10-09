@@ -1,7 +1,7 @@
 window.onload = function() {
   console.log("React Application Initializing ***** ");
 
-  var appUrl = "http://businesses-env.eba-a8pkrbiw.us-west-1.elasticbeanstalk.com/";
+  var appUrl = "https://local-biz.herokuapp.com/";
 
   class Greetings extends React.Component {
 
