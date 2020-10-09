@@ -1,25 +1,28 @@
 window.onload = function() {
-  const firebase = require("firebase");
-  require("firebase/firestore");
+  console.log("React Application Initializing ***** ");
 
-  var firebaseApp = firebase.initializeApp({
-    apiKey: 'AIzaSyBzQLxYmWIOATomDgkhmddF2BTa6lFwKb8',
-    authDomain: 'https://groove-test-af9ed.firebaseio.com',
-    projectId: 'groove-test-af9ed'
-  });
-
-  console.log("Firebase initialized ***** ");
-
-  var db = firebaseApp.firestore();
-
-  db.collection("businesses").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          console.log(`${doc.id} => ${doc.data()}`);
-      });
-  });
-
+  var appUrl = "http://businesses-env.eba-a8pkrbiw.us-west-1.elasticbeanstalk.com/";
 
   class Greetings extends React.Component {
+
+    componentDidMount() {
+      console.log("Fetching data from " + appUrl);
+      fetch(appUrl)
+        .then(res => res.json())
+        .then(
+          (businesses) => {
+            this.setState({
+              businesses: businesses
+            });
+          },
+          (error) => {
+            this.setState({
+              businesses: []
+            });
+          }
+        );
+    }
+
     render() {
       return React.createElement('h1', null, 'Groove Greetings, ' + this.props.name + '!');
     }

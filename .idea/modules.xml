@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../businesses/businesses.iml" filepath="$PROJECT_DIR$/../businesses/businesses.iml" />
       <module fileurl="file://$PROJECT_DIR$/groove-test.iml" filepath="$PROJECT_DIR$/groove-test.iml" />
     </modules>
   </component>
