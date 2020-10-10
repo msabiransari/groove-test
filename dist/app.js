@@ -24,12 +24,14 @@ window.onload = function() {
       fetch(appUrl)
         .then(res => res.json())
         .then(
-          (businesses) => {
+          (data) => {
+            console.log("Data loaded ", data);
             this.setState({
-              businesses: businesses
+              businesses: data
             });
           },
           (error) => {
+            console.log("Error while loading data", error);
             this.setState({
               businesses: []
             });
