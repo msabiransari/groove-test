@@ -43,8 +43,7 @@ window.onload = function() {
 
     render() {
       console.log("State data ", this.state);
-      gridOptions.rowData = this.state.businesses;
-      new agGrid.Grid(document.getElementById('businessListId'), gridOptions);
+      new agGrid.Grid(document.getElementById('businessListId'), this.state.gridOptions);
       //return React.createElement('table', { children: createRows(businesses) });
       //return React.createElement('h1', null, 'Groove Greetings, ' + this.props.name + '!');
     }
