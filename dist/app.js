@@ -3,21 +3,24 @@ window.onload = function() {
 
   var appUrl = "https://local-biz.herokuapp.com/";
 
-  var columnDefs = [
-    {headerName: "Business Name", field: "name"},
-    {headerName: "Street", field: "street"},
-    {headerName: "City", field: "city"},
-    {headerName: "State/Province", field: "state"},
-    {headerName: "Zip/Postal", field: "zip"},
-    {headerName: "Phone", field: "phone"}
-  ];
-
-  var gridOptions = {
-    columnDefs: columnDefs,
-    rowData: []
-  };
-
   class BusinessList extends React.Component {
+    var columnDefs = [
+      {headerName: "Business Name", field: "name"},
+      {headerName: "Street", field: "street"},
+      {headerName: "City", field: "city"},
+      {headerName: "State/Province", field: "state"},
+      {headerName: "Zip/Postal", field: "zip"},
+      {headerName: "Phone", field: "phone"}
+    ];
+
+    var gridOptions = {
+      columnDefs: this.columnDefs,
+      rowData: []
+    };
+
+    this.state = {
+      gridOptions: this.gridOptions
+    }
 
     componentDidMount() {
       console.log("Fetching data from " + appUrl);
@@ -26,20 +29,20 @@ window.onload = function() {
         .then(
           (data) => {
             console.log("Data loaded ", data);
+            const go = this.state.gridOptions;
+            go.rowData = data;
             this.setState({
-              businesses: data
+              gridOptions: go
             });
           },
           (error) => {
             console.log("Error while loading data", error);
-            this.setState({
-              businesses: []
-            });
           }
         );
     }
 
     render() {
+      console.log("State data ", this.state);
       gridOptions.rowData = this.state.businesses;
       new agGrid.Grid(document.getElementById('businessListId'), gridOptions);
       //return React.createElement('table', { children: createRows(businesses) });
