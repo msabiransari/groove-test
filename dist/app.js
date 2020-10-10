@@ -3,7 +3,21 @@ window.onload = function() {
 
   var appUrl = "https://local-biz.herokuapp.com/";
 
-  class Greetings extends React.Component {
+  var columnDefs = [
+    {headerName: "Business Name", field: "name"},
+    {headerName: "Street", field: "street"},
+    {headerName: "City", field: "city"},
+    {headerName: "State/Province", field: "state"},
+    {headerName: "Zip/Postal", field: "zip"},
+    {headerName: "Phone", field: "phone"}
+  ];
+
+  var gridOptions = {
+    columnDefs: columnDefs,
+    rowData: []
+  };
+
+  class BusinessList extends React.Component {
 
     componentDidMount() {
       console.log("Fetching data from " + appUrl);
@@ -24,12 +38,15 @@ window.onload = function() {
     }
 
     render() {
-      return React.createElement('h1', null, 'Groove Greetings, ' + this.props.name + '!');
+      gridOptions.rowData = this.state.businesses;
+      new agGrid.Grid(document.getElementById('businessListId'), gridOptions);
+      //return React.createElement('table', { children: createRows(businesses) });
+      //return React.createElement('h1', null, 'Groove Greetings, ' + this.props.name + '!');
     }
   }
 
   ReactDOM.render(
-    React.createElement(Greetings, { name : 'Muhammad Sabir' }),
+    React.createElement(BusinessList),
     document.getElementById('app')
   );
 };
