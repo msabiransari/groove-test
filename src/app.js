@@ -1,3 +1,7 @@
+import React from 'react';
+import { render } from 'react-dom';
+import { AgGridReact } from 'ag-grid-react';
+
 var appUrl = "https://local-biz.herokuapp.com/";
 
 class BusinessList extends React.Component {
