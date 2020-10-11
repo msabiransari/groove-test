@@ -4,25 +4,27 @@ window.onload = function() {
   var appUrl = "https://local-biz.herokuapp.com/";
 
   class BusinessList extends React.Component {
-    var columnDefs = [
-      {headerName: "Business Name", field: "name"},
-      {headerName: "Street", field: "street"},
-      {headerName: "City", field: "city"},
-      {headerName: "State/Province", field: "state"},
-      {headerName: "Zip/Postal", field: "zip"},
-      {headerName: "Phone", field: "phone"}
-    ];
+    constructor(props) {
+      super(props);
 
-    var gridOptions = {
-      columnDefs: this.columnDefs,
-      rowData: []
-    };
+      this.state = {
+        gridOptions: {
+          columnDefs: [
+            {headerName: "Business Name", field: "name"},
+            {headerName: "Street", field: "street"},
+            {headerName: "City", field: "city"},
+            {headerName: "State/Province", field: "state"},
+            {headerName: "Zip/Postal", field: "zip"},
+            {headerName: "Phone", field: "phone"}
+          ],
+          rowData: []
+        }
+      }
 
-    this.state = {
-      gridOptions: this.gridOptions
+      this.loadData();
     }
 
-    componentDidMount() {
+    loadData() {
       console.log("Fetching data from " + appUrl);
       fetch(appUrl)
         .then(res => res.json())
@@ -43,14 +45,13 @@ window.onload = function() {
 
     render() {
       console.log("State data ", this.state);
-      new agGrid.Grid(document.getElementById('businessListId'), this.state.gridOptions);
-      //return React.createElement('table', { children: createRows(businesses) });
-      //return React.createElement('h1', null, 'Groove Greetings, ' + this.props.name + '!');
+      return (
+        <div className="ag-theme-alpine" style={ { height: 400, width: 600 } }>
+          <AgGridReact gridOptions={this.state.gridOptions}></AgGridReact>
+        </div>
+      );
     }
   }
 
-  ReactDOM.render(
-    React.createElement(BusinessList),
-    document.getElementById('app')
-  );
+  ReactDOM.render(React.createElement(BusinessList), document.getElementById('app'));
 };
